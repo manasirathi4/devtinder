@@ -7,16 +7,31 @@ const app=express();
 
 //});
 
-app.use("/hello",(req,res)=>{
-    res.send("hiiii!");
+
+
+//app.use("/test",(req,res)=>{
+   // res.send("abracadabra!!");
+
+//});
+
+
+//app.get("/hello",(req,res)=>{
+//res.send("heiiiii");
+
+
+//});
+app.use("/hii",(req,res,next)=>{
+console.log("okayyyy");
+res.send("response");
+next();
+
+
+},
+(req,res)=>{
+res.send("2nd response");
+
 
 });
-
-app.use("/test",(req,res)=>{
-    res.send("abracadabra!!");
-
-});
-
 app.listen(3000,() =>{
 
 console.log("server is listning");
