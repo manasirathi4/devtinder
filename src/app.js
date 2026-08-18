@@ -1,38 +1,12 @@
-const express=require("express");
-const app=express();
-//app.use((req,res)=>{
+const express = require("express");
+const authMiddleware = require("./middlewares/auth");
 
-    
-    //res.send("world is beautiful!");
+const app = express();
 
-//});
-
-
-
-//app.use("/test",(req,res)=>{
-   // res.send("abracadabra!!");
-
-//});
-
-
-//app.get("/hello",(req,res)=>{
-//res.send("heiiiii");
-
-
-//});
-app.use("/hii",(req,res,next)=>{
-console.log("okayyyy");
-res.send("response");
-next();
-
-
-},
-(req,res)=>{
-res.send("2nd response");
-
-
+app.get("/profile", authMiddleware, (req, res) => {
+    res.send("Your Profile");
 });
-app.listen(3000,() =>{
 
-console.log("server is listning");
+app.listen(3000, () => {
+    console.log("Server running on 3000");
 });
