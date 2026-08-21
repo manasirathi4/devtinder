@@ -1,12 +1,33 @@
 const express = require("express");
-const authMiddleware = require("./middlewares/auth");
-
 const app = express();
 
-app.get("/profile", authMiddleware, (req, res) => {
-    res.send("Your Profile");
+const User = require("./config/models/user");
+const connectdb = require("./config/database");
+
+app.use("/signup",async(req,res)=>{
+const user= new User({
+firstname:"manasi",
+lastname:"rathi",
+emailid:"manasi@gmail.com",
+password:"1234",
+
+
 });
 
-app.listen(3000, () => {
-    console.log("Server running on 3000");
+await user.save();
+res.send("user added successfully!!");
 });
+
+
+
+connectdb()
+    .then(() => {
+        console.log("database is connected");
+
+        app.listen(3000, () => {
+            console.log("listening to server ....");
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
